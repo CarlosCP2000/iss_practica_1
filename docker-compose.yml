@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  user_api:
+    build:
+      context: ./user_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: user_api
+    restart: unless-stopped
+    ports:
+      - "80:8080"
+    networks:
+      - my_network
+
+  product_api:
+    build:
+      context: ./product_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: product_api
+    restart: unless-stopped
+    ports:
+      - "81:8080"
+    networks:
+      - my_network
+
+  validations_api:
+    build:
+      context: ./validations_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: validations_api
+    restart: unless-stopped
+    ports:
+      - "82:8080"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
