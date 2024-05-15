@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 
 app.post('/valid/adult', async (req, res) => {
     const birthday = req.body.birthday;
-    const dateBirthday =  Date(birthday);
+    const dateBirthday =  new Date(birthday);
     const currentDate = new Date();
     const ageValidate = currentDate.getFullYear() - dateBirthday.getFullYear();
 

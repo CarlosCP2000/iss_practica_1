@@ -1,0 +1,52 @@
+TESTING - POSTMAN
+
+
+POST: http://localhost:80/user
+
+Body:
+
+{
+    "dni": "76543210",
+    "name": "Ader",
+    "lastname": "Trinidad",
+    "birthday": "2000-04-14T05:00:00.000Z"
+}
+
+Scripts, Post-response:
+
+pm.test("Usuario creado exitosamente", function () {
+    pm.response.to.have.status(201);
+    pm.response.to.be.json;
+});
+pm.test("Valida la presencia del campo birthday en el response", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property("birthday");
+});
+
+--------------------------------
+
+POST: http://localhost:81/product/
+
+Body:
+
+{
+    "name": "Tostadora",
+    "price": 1,
+    "gif_card": 12
+}
+
+Scripts, Post-response:
+
+pm.test("Producto creado exitosamente", function () {
+    pm.response.to.have.status(201);
+    pm.response.to.be.json;
+});
+pm.test("Tarjeta de regalo en el rango", function () {
+    var gif_card = pm.response.json().gif_card;
+    pm.expect(gif_card).to.be.at.least(0);
+    pm.expect(gif_card).to.be.at.most(100);
+});
+pm.test("Precio mayor a cero", function () {
+    var price = pm.response.json().price;
+    pm.expect(price).to.be.above(0);
+});
