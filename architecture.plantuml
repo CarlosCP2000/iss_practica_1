@@ -1,0 +1,29 @@
+@startuml
+
+node DOCKER_COMPOSE {
+  node CONTAINER_80 {
+  [UsersAPI]
+  }
+  node CONTAINER_81{
+   [ProductsAPI]
+  }
+  node CONTAINER_82{
+  [ValidationsAPI]
+  }
+}
+
+database MONGO_DB
+
+component FRONT_USERS
+component FRONT_PRODUCTS
+
+FRONT_USERS -- CONTAINER_80
+CONTAINER_81 -- FRONT_PRODUCTS
+
+CONTAINER_80 -- CONTAINER_82
+CONTAINER_81 -- CONTAINER_82
+
+MONGO_DB -- CONTAINER_80
+MONGO_DB -- CONTAINER_81
+
+@enduml
